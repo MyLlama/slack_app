@@ -1,4 +1,4 @@
-function CurrentDays() {
+function getCurrentDay() {
   const currentDate = new Date();
 
   const currentDay = currentDate.getDay();
@@ -10,5 +10,5 @@ function CurrentDays() {
 }
 
 module.exports = {
-  CurrentDays,
+  getCurrentDay,
 };

@@ -1,6 +1,6 @@
-const { CurrentDays } = require('../../utilities');
+const { getCurrentDay } = require('../../utilities');
 
-const day = CurrentDays();
+const day = getCurrentDay();
 const unauthorisedUserView = {
   type: 'home',
   blocks: [
