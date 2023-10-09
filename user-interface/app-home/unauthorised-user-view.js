@@ -1,3 +1,6 @@
+const { CurrentDays } = require('../../utilities');
+
+const day = CurrentDays();
 const unauthorisedUserView = {
   type: 'home',
   blocks: [
@@ -5,7 +8,7 @@ const unauthorisedUserView = {
       type: 'header',
       text: {
         type: 'plain_text',
-        text: 'Happy Wednesday!',
+        text: `Happy ${day}!`,
         emoji: true,
       },
     },
