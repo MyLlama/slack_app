@@ -1,6 +1,6 @@
 const modal = require('../../user-interface/models/daily-checkin-modal');
 
-const OpenDailyCheckinModalCallback = async ({ ack, body, client }) => {
+const openDailyCheckinModalCallback = async ({ ack, body, client }) => {
   await ack();
 
   try {
@@ -12,4 +12,4 @@ const OpenDailyCheckinModalCallback = async ({ ack, body, client }) => {
     console.error('error', error);
   }
 };
-module.exports = { OpenDailyCheckinModalCallback };
+module.exports = { openDailyCheckinModalCallback };

@@ -1,4 +1,4 @@
-const QuestionsModal = {
+const dailyCheckinModal = {
   title: {
     type: 'plain_text',
     text: 'Workplace check-in',
@@ -200,4 +200,4 @@ const QuestionsModal = {
   callback_id: 'dailyCheckin',
 };
 
-module.exports = QuestionsModal;
+module.exports = dailyCheckinModal;
