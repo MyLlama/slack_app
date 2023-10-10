@@ -17,10 +17,8 @@ module.exports.getMasterQuote = async function getMasterQuote() {
     const dataLength = response.data.data.length;
     const randomQuoteIndex = Math.floor(Math.random() * dataLength);
     if (response.status === 200) {
-      masterQuote.quote =
-        response.data.data[randomQuoteIndex].attributes.MasterQuotes;
-      masterQuote.author =
-        response.data.data[randomQuoteIndex].attributes.Author;
+      masterQuote.quote = response.data.data[randomQuoteIndex].attributes.MasterQuotes;
+      masterQuote.author = response.data.data[randomQuoteIndex].attributes.Author;
     }
   } catch (error) {
     console.error(`Error fetching data ${error}`);
