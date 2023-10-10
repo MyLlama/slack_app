@@ -9,11 +9,12 @@ module.exports.getMasterQuote = async function getMasterQuote() {
     author: '',
   };
   try {
-    const apiEndPoint = 'http://13.235.49.69:1337/api/master-quotes?populate=*';
+    const baseUrl = process.env.STRAPI_BASE_URL;
+    const url = `${baseUrl}/master-quotes?populate=*`;
     const headers = {
       Authorization: `Bearer ${process.env.SLACK_STRAPI_AUTH_TOKEN}`,
     };
-    const response = await axios.get(apiEndPoint, { headers });
+    const response = await axios.get(url, { headers });
     const dataLength = response.data.data.length;
     const randomQuoteIndex = Math.floor(Math.random() * dataLength);
     if (response.status === 200) {
