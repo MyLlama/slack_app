@@ -1,13 +1,12 @@
 const view = require('../../user-interface/app-home/unauthorised-user-view');
 
 const appHomeOpenedCallback = async ({ client, event }) => {
-  // Ignore the `app_home_opened` event for anything but the Home tab
   if (event.tab !== 'home') return;
-
+  const homeView = await view.unauthorisedUserView();
   try {
     await client.views.publish({
       user_id: event.user,
-      view,
+      view: homeView,
     });
   } catch (error) {
     console.error(error);
