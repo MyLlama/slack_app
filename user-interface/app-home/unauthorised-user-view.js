@@ -1,43 +1,67 @@
 const { getCurrentDay } = require('../../utilities');
+const { getMasterQuote } = require('../../services/strapi/index');
 
-const day = getCurrentDay();
-const unauthorisedUserView = {
-  type: 'home',
-  blocks: [
-    {
-      type: 'header',
-      text: {
-        type: 'plain_text',
-        text: `Happy ${day}!`,
-        emoji: true,
-      },
-    },
-    {
-      type: 'context',
-      elements: [
-        {
+async function unauthorisedUserView() {
+  const day = getCurrentDay();
+  const quote = await getMasterQuote();
+  return {
+    type: 'home',
+    blocks: [
+      {
+        type: 'header',
+        text: {
           type: 'plain_text',
-          text: ':wave: Hey, how do you feel today? Take a 30 sec check-in !',
+          text: 'Mindful Moment',
           emoji: true,
         },
-      ],
-    },
-    {
-      type: 'actions',
-      elements: [
-        {
-          type: 'button',
-          text: {
+      },
+      {
+        type: 'section',
+        block_id: 'sectionBlockOnlyPlainText',
+        text: {
+          type: 'plain_text',
+          text: `"${quote.quote}" - ${quote.author}`,
+          emoji: true,
+        },
+      },
+      {
+        type: 'divider',
+      },
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: `Happy ${day}!`,
+          emoji: true,
+        },
+      },
+      {
+        type: 'context',
+        elements: [
+          {
             type: 'plain_text',
-            text: ':Memo: Check-in',
+            text: ':wave: Hey, how do you feel today? Take a 30 sec check-in !',
             emoji: true,
           },
-          value: 'click_me_123',
-          action_id: 'open-Daily-Checkin-modal-action-id',
-        },
-      ],
-    },
-  ],
-};
+        ],
+      },
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: ':Memo: Check-in',
+              emoji: true,
+            },
+            value: 'click_me_123',
+            action_id: 'open-Daily-Checkin-modal-action-id',
+          },
+        ],
+      },
+    ],
+  };
+}
 
-module.exports = unauthorisedUserView;
+module.exports = { unauthorisedUserView };
