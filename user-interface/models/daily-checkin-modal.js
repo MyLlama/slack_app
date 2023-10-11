@@ -1,8 +1,7 @@
 const { getdailyCheckinQuestions } = require('../../services/strapi/index');
 
-async function dailyCheckinModal() {
+async function dailyCheckinModal(username) {
   const dailyCheckinQuestions = await getdailyCheckinQuestions();
-  console.log(dailyCheckinQuestions);
   return {
     title: {
       type: 'plain_text',
@@ -18,7 +17,7 @@ async function dailyCheckinModal() {
         elements: [
           {
             type: 'plain_text',
-            text: ':wave: Hey Krishan Sharma!',
+            text: `:wave: Hey <@${username}>!`,
             emoji: true,
           },
         ],
