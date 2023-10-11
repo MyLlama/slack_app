@@ -56,7 +56,7 @@ async function unauthorisedUserView() {
               emoji: true,
             },
             value: 'click_me_123',
-            action_id: 'open-Daily-Checkin-modal-action-id',
+            action_id: 'open-daily-checkin-modal',
           },
         ],
       },
