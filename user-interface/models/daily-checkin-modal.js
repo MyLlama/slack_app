@@ -1,203 +1,208 @@
-const dailyCheckinModal = {
-  title: {
-    type: 'plain_text',
-    text: 'Workplace check-in',
-  },
-  submit: {
-    type: 'plain_text',
-    text: 'Submit',
-  },
-  blocks: [
-    {
-      type: 'context',
-      elements: [
-        {
-          type: 'plain_text',
-          text: ':wave: Hey Krishan Sharma!',
-          emoji: true,
-        },
-      ],
-    },
-    {
-      type: 'input',
-      element: {
-        type: 'multi_static_select',
-        placeholder: {
-          type: 'plain_text',
-          text: 'I feel..',
-          emoji: true,
-        },
-        options: [
-          {
-            text: {
-              type: 'plain_text',
-              text: ':smile:',
-              emoji: true,
-            },
-            value: 'value-0',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':grinning:',
-              emoji: true,
-            },
-            value: 'value-1',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_smiling_face:',
-              emoji: true,
-            },
-            value: 'value-2',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':confused:',
-              emoji: true,
-            },
-            value: 'value-3',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_frowning_face:',
-              emoji: true,
-            },
-            value: 'value-4',
-          },
-        ],
-        action_id: 'multi_static_select-action',
-      },
-      label: {
-        type: 'plain_text',
-        text: ':muscle:How are you feeling physically today ?',
-        emoji: true,
-      },
-    },
-    {
-      type: 'input',
-      element: {
-        type: 'multi_static_select',
-        placeholder: {
-          type: 'plain_text',
-          text: 'I feel..',
-          emoji: true,
-        },
-        options: [
-          {
-            text: {
-              type: 'plain_text',
-              text: ':smile:',
-              emoji: true,
-            },
-            value: 'value-0',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':grinning:',
-              emoji: true,
-            },
-            value: 'value-1',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_smiling_face:',
-              emoji: true,
-            },
-            value: 'value-2',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':confused:',
-              emoji: true,
-            },
-            value: 'value-3',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_frowning_face:',
-              emoji: true,
-            },
-            value: 'value-4',
-          },
-        ],
-        action_id: 'multi_static_select-action',
-      },
-      label: {
-        type: 'plain_text',
-        text: ':zap:How are you feeling Mentally today ?',
-        emoji: true,
-      },
-    },
-    {
-      type: 'input',
-      element: {
-        type: 'multi_static_select',
-        placeholder: {
-          type: 'plain_text',
-          text: 'I feel..',
-          emoji: true,
-        },
-        options: [
-          {
-            text: {
-              type: 'plain_text',
-              text: ':smile:',
-              emoji: true,
-            },
-            value: 'value-0',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':grinning:',
-              emoji: true,
-            },
-            value: 'value-1',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_smiling_face:',
-              emoji: true,
-            },
-            value: 'value-2',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':confused:',
-              emoji: true,
-            },
-            value: 'value-3',
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: ':slightly_frowning_face:',
-              emoji: true,
-            },
-            value: 'value-4',
-          },
-        ],
-        action_id: 'multi_static_select-action',
-      },
-      label: {
-        type: 'plain_text',
-        text: ':busts_in_silhouette:How Socially connected do you feel today?',
-        emoji: true,
-      },
-    },
-  ],
-  type: 'modal',
-  callback_id: 'dailyCheckin',
-};
+const { getdailyCheckinQuestions } = require('../../services/strapi/index');
 
-module.exports = dailyCheckinModal;
+async function dailyCheckinModal() {
+  const dailyCheckinQuestions = await getdailyCheckinQuestions();
+  console.log(dailyCheckinQuestions);
+  return {
+    title: {
+      type: 'plain_text',
+      text: 'Workplace check-in',
+    },
+    submit: {
+      type: 'plain_text',
+      text: 'Submit',
+    },
+    blocks: [
+      {
+        type: 'context',
+        elements: [
+          {
+            type: 'plain_text',
+            text: ':wave: Hey Krishan Sharma!',
+            emoji: true,
+          },
+        ],
+      },
+      {
+        type: 'input',
+        element: {
+          type: 'multi_static_select',
+          placeholder: {
+            type: 'plain_text',
+            text: 'I feel..',
+            emoji: true,
+          },
+          options: [
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[0].options[0],
+                emoji: true,
+              },
+              value: 'value-0',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[0].options[1],
+                emoji: true,
+              },
+              value: 'value-1',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[0].options[2],
+                emoji: true,
+              },
+              value: 'value-2',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[0].options[3],
+                emoji: true,
+              },
+              value: 'value-3',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[0].options[4],
+                emoji: true,
+              },
+              value: 'value-4',
+            },
+          ],
+          action_id: 'multi_static_select-action',
+        },
+        label: {
+          type: 'plain_text',
+          text: dailyCheckinQuestions[0].question,
+          emoji: true,
+        },
+      },
+      {
+        type: 'input',
+        element: {
+          type: 'multi_static_select',
+          placeholder: {
+            type: 'plain_text',
+            text: 'I feel..',
+            emoji: true,
+          },
+          options: [
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[1].options[0],
+                emoji: true,
+              },
+              value: 'value-0',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[1].options[1],
+                emoji: true,
+              },
+              value: 'value-1',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[1].options[2],
+                emoji: true,
+              },
+              value: 'value-2',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[1].options[3],
+                emoji: true,
+              },
+              value: 'value-3',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[1].options[4],
+                emoji: true,
+              },
+              value: 'value-4',
+            },
+          ],
+          action_id: 'multi_static_select-action',
+        },
+        label: {
+          type: 'plain_text',
+          text: dailyCheckinQuestions[1].question,
+          emoji: true,
+        },
+      },
+      {
+        type: 'input',
+        element: {
+          type: 'multi_static_select',
+          placeholder: {
+            type: 'plain_text',
+            text: 'I feel..',
+            emoji: true,
+          },
+          options: [
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[2].options[0],
+                emoji: true,
+              },
+              value: 'value-0',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[2].options[1],
+                emoji: true,
+              },
+              value: 'value-1',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[2].options[2],
+                emoji: true,
+              },
+              value: 'value-2',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[2].options[3],
+                emoji: true,
+              },
+              value: 'value-3',
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: dailyCheckinQuestions[2].options[4],
+                emoji: true,
+              },
+              value: 'value-4',
+            },
+          ],
+          action_id: 'multi_static_select-action',
+        },
+        label: {
+          type: 'plain_text',
+          text: dailyCheckinQuestions[2].question,
+          emoji: true,
+        },
+      },
+    ],
+    type: 'modal',
+    callback_id: 'dailyCheckin',
+  };
+}
+module.exports = { dailyCheckinModal };
