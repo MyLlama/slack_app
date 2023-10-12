@@ -2,7 +2,7 @@ const { getdailyCheckinQuestions } = require('../../services/strapi/index');
 
 async function dailyCheckinModal(username) {
   const dailyCheckinQuestions = await getdailyCheckinQuestions();
-  const questions = dailyCheckinQuestions.map(dailyCheckinQuestion => {
+  const questions = dailyCheckinQuestions.map((dailyCheckinQuestion) => {
     return {
       type: 'input',
       element: {
@@ -61,7 +61,7 @@ async function dailyCheckinModal(username) {
         text: dailyCheckinQuestion.question,
         emoji: true,
       },
-    }
+    };
   });
   return {
     title: {
