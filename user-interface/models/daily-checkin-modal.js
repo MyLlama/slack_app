@@ -25,7 +25,7 @@ async function dailyCheckinModal(username) {
       {
         type: 'input',
         element: {
-          type: 'multi_static_select',
+          type: 'static_select',
           placeholder: {
             type: 'plain_text',
             text: 'I feel..',
@@ -84,7 +84,7 @@ async function dailyCheckinModal(username) {
       {
         type: 'input',
         element: {
-          type: 'multi_static_select',
+          type: 'static_select',
           placeholder: {
             type: 'plain_text',
             text: 'I feel..',
@@ -132,7 +132,7 @@ async function dailyCheckinModal(username) {
               value: 'value-4',
             },
           ],
-          action_id: 'multi_static_select-action',
+          action_id: 'static_select-action',
         },
         label: {
           type: 'plain_text',
@@ -143,7 +143,7 @@ async function dailyCheckinModal(username) {
       {
         type: 'input',
         element: {
-          type: 'multi_static_select',
+          type: 'static_select',
           placeholder: {
             type: 'plain_text',
             text: 'I feel..',
@@ -191,7 +191,7 @@ async function dailyCheckinModal(username) {
               value: 'value-4',
             },
           ],
-          action_id: 'multi_static_select-action',
+          action_id: 'static_select-action',
         },
         label: {
           type: 'plain_text',
