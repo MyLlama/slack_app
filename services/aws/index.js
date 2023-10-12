@@ -16,21 +16,17 @@ async function dailyCheckinsFeedback(params) {
     id: params.body.user.id + Math.random().toString(),
     User_id: params.body.user.id,
     Timestamp: Math.floor(Date.now() / 1000),
-    Checkins: {
-      Question_1: {
-        Question: params.data[0].question,
-        Answer: params.data[0].answer,
-      },
-      Question_2: {
-        Question: params.data[1].question,
-        Answer: params.data[1].answer,
-      },
-      Question_3: {
-        Question: params.data[2].question,
-        Answer: params.data[2].answer,
-      },
-    },
+    Checkins: { },
   };
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < params.data.length; i++) {
+    const key = `Question_${i + 1}`;
+    input.Checkins[key] = {
+      Question: params.data[i].question,
+      Answer: params.data[i].answer,
+    };
+  }
   const payload = {
     TableName: 'DailyCheckin',
     Item: input,

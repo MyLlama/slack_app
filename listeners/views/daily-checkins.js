@@ -5,7 +5,6 @@ const postDailychechinFeedback = async ({ ack, body }) => {
   await ack({
     response_action: 'clear',
   });
-  console.log(body);
   try {
     const feedbackData = Object.values(body.view.state.values).map((value) => ({
       question: Object.keys(value)[0],
