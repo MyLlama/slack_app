@@ -10,20 +10,20 @@ const awsConfig = {
 AWS.config.update(awsConfig);
 
 const docClient = new AWS.DynamoDB.DocumentClient();
+const timestamp = Math.floor(Date.now() / 1000);
 
-async function dailyCheckinsFeedback(params) {
-  const checkin = params.data.map((item) => ({
+async function dailyCheckinFeedback(params) {
+  const checkinFeedback = params.data.map((item) => ({
     question: item.question,
     answer: item.answer,
   }));
-
   const payload = {
     TableName: 'DailyCheckin',
     Item: {
-      id: params.body.user.id + Math.floor(Date.now() / 1000),
+      id: params.body.user.id + timestamp,
       user_id: params.body.user.id,
-      timestamp: Math.floor(Date.now() / 1000),
-      checkinFeedback: checkin,
+      timestamp,
+      checkinFeedback,
     },
   };
 
@@ -36,4 +36,4 @@ async function dailyCheckinsFeedback(params) {
   });
 }
 
-module.exports = { dailyCheckinsFeedback };
+module.exports = { dailyCheckinFeedback };

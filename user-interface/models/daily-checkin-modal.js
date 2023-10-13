@@ -1,7 +1,7 @@
-const { getdailyCheckinQuestions } = require('../../services/strapi/index');
+const { getDailyCheckinQuestions } = require('../../services/strapi/index');
 
 async function dailyCheckinModal(username) {
-  const dailyCheckinQuestions = await getdailyCheckinQuestions();
+  const dailyCheckinQuestions = await getDailyCheckinQuestions();
   const questions = dailyCheckinQuestions.map((dailyCheckinQuestion) => ({
     type: 'input',
     element: {
@@ -85,7 +85,7 @@ async function dailyCheckinModal(username) {
       ...questions,
     ],
     type: 'modal',
-    callback_id: 'dailyCheckin',
+    callback_id: 'postDailyCheckin',
   };
 }
 module.exports = { dailyCheckinModal };
