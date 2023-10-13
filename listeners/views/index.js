@@ -1,7 +1,7 @@
 const { sampleViewCallback } = require('./sample-view');
-const { openDailyCheckinModalCallback } = require('../actions/open-daily-checkin-action');
+const { postDailyCheckinFeedback } = require('./daily-checkins');
 
 module.exports.register = (app) => {
   app.view('sample_view_id', sampleViewCallback);
-  app.view('dailyCheckin', openDailyCheckinModalCallback);
+  app.view('postDailyCheckin', postDailyCheckinFeedback);
 };

@@ -25,7 +25,7 @@ async function getMasterQuote() {
   }
 }
 
-async function getdailyCheckinQuestions() {
+async function getDailyCheckinQuestions() {
   try {
     const url = `${baseUrl}/daily-checkins?populate=*`;
     const headers = {
@@ -45,5 +45,5 @@ async function getdailyCheckinQuestions() {
 
 module.exports = {
   getMasterQuote,
-  getdailyCheckinQuestions,
+  getDailyCheckinQuestions,
 };
