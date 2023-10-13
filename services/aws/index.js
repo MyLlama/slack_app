@@ -12,30 +12,26 @@ AWS.config.update(awsConfig);
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 async function dailyCheckinsFeedback(params) {
-  const input = {
-    id: params.body.user.id + Math.random().toString(),
-    User_id: params.body.user.id,
-    Timestamp: Math.floor(Date.now() / 1000),
-    Checkins: { },
-  };
+  const checkin = params.data.map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }));
 
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < params.data.length; i++) {
-    const key = `Question_${i + 1}`;
-    input.Checkins[key] = {
-      Question: params.data[i].question,
-      Answer: params.data[i].answer,
-    };
-  }
   const payload = {
     TableName: 'DailyCheckin',
-    Item: input,
+    Item: {
+      id: params.body.user.id + Math.floor(Date.now() / 1000),
+      user_id: params.body.user.id,
+      timestamp: Math.floor(Date.now() / 1000),
+      checkinFeedback: checkin,
+    },
   };
-  docClient.put(payload, (err) => {
-    if (err) {
-      console.log(`users::save::error - ${err}`);
+
+  docClient.put(payload, (error) => {
+    if (error) {
+      console.error(error);
     } else {
-      console.log('users::save::success');
+      console.log('Daily checkins feedback posted successfully !!');
     }
   });
 }

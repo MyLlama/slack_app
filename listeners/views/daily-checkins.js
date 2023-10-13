@@ -1,7 +1,7 @@
 const { dailyCheckinsFeedback } = require('../../services/aws/index');
 
 // eslint-disable-next-line consistent-return
-const postDailychechinFeedback = async ({ ack, body }) => {
+const postDailyCheckin = async ({ ack, body }) => {
   await ack({
     response_action: 'clear',
   });
@@ -16,4 +16,4 @@ const postDailychechinFeedback = async ({ ack, body }) => {
     console.error(error);
   }
 };
-module.exports = { postDailychechinFeedback };
+module.exports = { postDailyCheckin };
