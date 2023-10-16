@@ -30,7 +30,7 @@ async function dailyCheckinFeedback(params) {
     if (error) {
       console.error(error);
     } else {
-      console.log('Daily checkins feedback posted successfully !!');
+      console.log('Daily check-in feedback has been posted successfully.');
     }
   });
 }
