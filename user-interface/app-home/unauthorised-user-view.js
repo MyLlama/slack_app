@@ -71,7 +71,7 @@ async function unauthorisedUserView() {
               emoji: true,
             },
             value: 'click_me_1234',
-            action_id: 'open-Survey-modal',
+            action_id: 'open-survey-modal',
           },
         ],
       },

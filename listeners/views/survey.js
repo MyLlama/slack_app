@@ -1,4 +1,4 @@
-const { SurveyFeedback } = require('../../services/aws/index');
+const { surveyFeedback } = require('../../services/aws/index');
 
 // eslint-disable-next-line consistent-return
 const postSurveyFeedback = async ({ ack, body }) => {
@@ -6,12 +6,12 @@ const postSurveyFeedback = async ({ ack, body }) => {
     response_action: 'clear',
   });
   try {
-    const SurveyData = Object.values(body.view.state.values).map((value) => ({
+    const surveyData = Object.values(body.view.state.values).map((value) => ({
       question: Object.keys(value)[0],
       answer: Object.values(value)[0].selected_option.value,
     }));
-    SurveyFeedback({ data: SurveyData, body });
-    return SurveyData;
+    surveyFeedback({ data: surveyData, body });
+    return surveyData;
   } catch (error) {
     console.error(error);
   }

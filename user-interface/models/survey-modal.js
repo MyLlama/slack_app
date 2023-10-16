@@ -1,71 +1,39 @@
 const { getSurveyQuestions } = require('../../services/strapi/index');
 
 async function getSurveyModal(username) {
-  const SurveyQuestions = await getSurveyQuestions();
-  const questions = SurveyQuestions.map((SurveyQuestion) => ({
-    type: 'input',
-    element: {
-      type: 'static_select',
-      placeholder: {
+  const surveyQuestions = await getSurveyQuestions();
+  const questions = surveyQuestions.Survey.map((surveyQuestion) => {
+    const options = surveyQuestion.options.map((surveyOption) => ({
+      text: {
         type: 'plain_text',
-        text: 'I feel..',
+        text: surveyOption,
         emoji: true,
       },
-      options: [
-        {
-          text: {
-            type: 'plain_text',
-            text: 'good',
-            emoji: true,
-          },
-          value: SurveyQuestion.options[0],
+      value: surveyOption,
+    }));
+    return {
+      type: 'input',
+      element: {
+        type: 'static_select',
+        placeholder: {
+          type: 'plain_text',
+          text: 'I feel..',
+          emoji: true,
         },
-        {
-          text: {
-            type: 'plain_text',
-            text: 'better',
-            emoji: true,
-          },
-          value: SurveyQuestion.options[1],
-        },
-        {
-          text: {
-            type: 'plain_text',
-            text: 'best',
-            emoji: true,
-          },
-          value: SurveyQuestion.options[2],
-        },
-        {
-          text: {
-            type: 'plain_text',
-            text: 'wonderfull',
-            emoji: true,
-          },
-          value: SurveyQuestion.options[3],
-        },
-        {
-          text: {
-            type: 'plain_text',
-            text: 'Excieting',
-            emoji: true,
-          },
-          value: SurveyQuestion.options[4],
-        },
-      ],
-      action_id: SurveyQuestion.question,
-    },
-    label: {
-      type: 'plain_text',
-      text: SurveyQuestion.question,
-      emoji: true,
-    },
-  }));
-
+        options,
+        action_id: surveyQuestion.question,
+      },
+      label: {
+        type: 'plain_text',
+        text: surveyQuestion.question,
+        emoji: true,
+      },
+    };
+  });
   return {
     title: {
       type: 'plain_text',
-      text: 'Workplace check-in',
+      text: surveyQuestions.title,
     },
     submit: {
       type: 'plain_text',
@@ -88,4 +56,5 @@ async function getSurveyModal(username) {
     callback_id: 'postSurvey',
   };
 }
+
 module.exports = getSurveyModal;

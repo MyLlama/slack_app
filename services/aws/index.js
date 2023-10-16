@@ -10,7 +10,6 @@ const awsConfig = {
 AWS.config.update(awsConfig);
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-const timestamp = Math.floor(Date.now() / 1000);
 
 async function dailyCheckinFeedback(params) {
   const checkinFeedback = params.data.map((item) => ({
@@ -20,9 +19,9 @@ async function dailyCheckinFeedback(params) {
   const payload = {
     TableName: 'DailyCheckin',
     Item: {
-      id: params.body.user.id + timestamp,
+      id: params.body.user.id + Math.floor(Date.now() / 1000),
       user_id: params.body.user.id,
-      timestamp,
+      timestamp: Math.floor(Date.now() / 1000),
       checkinFeedback,
     },
   };
@@ -36,18 +35,18 @@ async function dailyCheckinFeedback(params) {
   });
 }
 
-async function SurveyFeedback(params) {
-  const SurveysFeedback = params.data.map((item) => ({
+async function surveyFeedback(params) {
+  const feedback = params.data.map((item) => ({
     question: item.question,
     answer: item.answer,
   }));
   const payload = {
     TableName: 'Surveys',
     Item: {
-      id: params.body.user.id + timestamp,
+      id: params.body.user.id + Math.floor(Date.now() / 1000),
       user_id: params.body.user.id,
-      timestamp,
-      SurveysFeedback,
+      timestamp: Math.floor(Date.now() / 1000),
+      feedback,
     },
   };
 
@@ -60,4 +59,4 @@ async function SurveyFeedback(params) {
   });
 }
 
-module.exports = { dailyCheckinFeedback, SurveyFeedback };
+module.exports = { dailyCheckinFeedback, surveyFeedback };
