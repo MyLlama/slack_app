@@ -42,8 +42,26 @@ async function getDailyCheckinQuestions() {
     return [];
   }
 }
+async function getSurveyQuestions() {
+  try {
+    const url = `${baseUrl}/surveys?populate=*`;
+    const headers = {
+      Authorization: `Bearer ${process.env.SLACK_STRAPI_AUTH_TOKEN}`,
+    };
+    const response = await axios.get(url, { headers });
+    if (response.status === 200) {
+      const survey = response.data.data[0].attributes.Survey;
+      return survey;
+    }
+    return [];
+  } catch (error) {
+    console.error(`Error fetching data ${error}`);
+    return [];
+  }
+}
 
 module.exports = {
   getMasterQuote,
   getDailyCheckinQuestions,
+  getSurveyQuestions,
 };

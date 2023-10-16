@@ -36,4 +36,28 @@ async function dailyCheckinFeedback(params) {
   });
 }
 
-module.exports = { dailyCheckinFeedback };
+async function SurveyFeedback(params) {
+  const SurveysFeedback = params.data.map((item) => ({
+    question: item.question,
+    answer: item.answer,
+  }));
+  const payload = {
+    TableName: 'Surveys',
+    Item: {
+      id: params.body.user.id + timestamp,
+      user_id: params.body.user.id,
+      timestamp,
+      SurveysFeedback,
+    },
+  };
+
+  docClient.put(payload, (error) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('Daily checkins feedback posted successfully !!');
+    }
+  });
+}
+
+module.exports = { dailyCheckinFeedback, SurveyFeedback };
