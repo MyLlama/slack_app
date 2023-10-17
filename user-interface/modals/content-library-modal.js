@@ -1,16 +1,14 @@
-const { getActivityCollection } = require('../../services/strapi/index');
+const { getActivityCollections } = require('../../services/strapi/index');
 
 const baseUrl = process.env.STRAPI_BASE_URL;
 
 async function getContentLibraryModal(body) {
-  const collections = await getActivityCollection();
+  const collections = await getActivityCollections();
   try {
     // Extract the collection id from action id
     const collectionId = body.actions[0].action_id.replace('open-content-library-modal-', '');
-    console.log(collectionId);
     // Find the selected collection based on collectionId
     const selectedCollection = collections.find((collection) => collection.id == collectionId);
-    console.log(selectedCollection.attributes.activities);
     if (selectedCollection) {
       // Use map to create an array of modals for each activity
       const activities = selectedCollection.attributes.activities.map((activity) => [{
@@ -73,7 +71,6 @@ async function getContentLibraryModal(body) {
         },
         blocks: activities.flat(1),
       };
-      console.log('view', view);
       return view;
     }
     return [];
