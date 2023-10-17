@@ -9,11 +9,9 @@ async function contentLibraryModal(body) {
   try {
     // Extract the collection id from action id
     const collectionId = body.actions[0].action_id.replace('open-content-library-modal-', '');
-    console.log(collectionId);
     // Find the selected collection based on collectionId
     // eslint-disable-next-line eqeqeq
     const selectedCollection = collections.find((collection) => collection.id == collectionId);
-    console.log(selectedCollection.attributes.activities);
     if (selectedCollection) {
       // Use map to create an array of modals for each activity
       // eslint-disable-next-line arrow-body-style
@@ -84,7 +82,6 @@ async function contentLibraryModal(body) {
         },
         blocks: activities.flat(1),
       };
-      console.log('view', view);
       return view;
 
     }

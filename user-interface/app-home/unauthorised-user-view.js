@@ -64,6 +64,21 @@ async function unauthorisedUserView() {
         ],
       },
       {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: ':llama: Survey',
+              emoji: true,
+            },
+            value: 'click_me_1234',
+            action_id: 'open-survey-modal',
+          },
+        ],
+      },
+      {
         type: 'divider',
       },
       {

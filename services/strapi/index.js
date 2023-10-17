@@ -25,13 +25,27 @@ async function getMasterQuote() {
   }
 }
 
-async function getdailyCheckinQuestions() {
+async function getDailyCheckinQuestions() {
   try {
     const url = `${baseUrl}/daily-checkins?populate=*`;
     const response = await axios.get(url, { headers });
     if (response.status === 200) {
       const dailyCheckins = response.data.data[0].attributes.DailyCheckins;
       return dailyCheckins;
+    }
+    return [];
+  } catch (error) {
+    console.error(`Error fetching data ${error}`);
+    return [];
+  }
+}
+async function getSurveyQuestions() {
+  try {
+    const url = `${baseUrl}/surveys?populate=*`;
+    const response = await axios.get(url, { headers });
+    if (response.status === 200) {
+      const survey = response.data.data[0].attributes;
+      return survey;
     }
     return [];
   } catch (error) {
@@ -57,6 +71,7 @@ async function getActivityCollection() {
 
 module.exports = {
   getMasterQuote,
-  getdailyCheckinQuestions,
   getActivityCollection,
+  getDailyCheckinQuestions,
+  getSurveyQuestions,
 };
