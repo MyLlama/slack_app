@@ -17,7 +17,7 @@ async function getSurveyModal(username) {
         type: 'static_select',
         placeholder: {
           type: 'plain_text',
-          text: 'I feel..',
+          text: 'Vote for...',
           emoji: true,
         },
         options,
