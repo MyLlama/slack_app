@@ -1,5 +1,5 @@
 const { sampleViewCallback } = require('./sample-view');
-const { postDailyCheckinFeedback } = require('./daily-checkins');
+const { postDailyCheckinFeedback } = require('./daily-checkin');
 const { postSurveyFeedback } = require('./survey');
 
 module.exports.register = (app) => {
