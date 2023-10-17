@@ -1,9 +1,9 @@
-const { getActivityCollection } = require('../../services/strapi/index');
+const { getActivityCollections } = require('../../services/strapi/index');
 
 const baseUrl = process.env.STRAPI_BASE_URL;
 
 async function getActivityCollectionView() {
-  const activityCollections = await getActivityCollection();
+  const activityCollections = await getActivityCollections();
   const activities = activityCollections.map((activityCollection) => {
     const imageEndPoint = activityCollection.attributes.thumbnail.data.attributes.url;
     const collectionTitle = activityCollection.attributes.title;

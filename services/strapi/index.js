@@ -54,7 +54,7 @@ async function getSurveyQuestions() {
   }
 }
 
-async function getActivityCollection() {
+async function getActivityCollections() {
   try {
     const url = `${baseUrl}/activity-collections?populate[thumbnail][populate]=*&populate[activities][populate]=*`;
     const response = await axios.get(url, { headers });
@@ -73,5 +73,5 @@ module.exports = {
   getMasterQuote,
   getDailyCheckinQuestions,
   getSurveyQuestions,
-  getActivityCollection,
+  getActivityCollections,
 };
