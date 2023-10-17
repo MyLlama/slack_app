@@ -3,7 +3,7 @@ const { config } = require('dotenv');
 
 config();
 
-const baseUrl = process.env.STRAPI_BASE_URL;
+const baseUrl = `${process.env.STRAPI_BASE_URL}/api`;
 const headers = {
   Authorization: `Bearer ${process.env.SLACK_STRAPI_AUTH_TOKEN}`,
 };
@@ -54,8 +54,24 @@ async function getSurveyQuestions() {
   }
 }
 
+async function getActivityCollections() {
+  try {
+    const url = `${baseUrl}/activity-collections?populate[thumbnail][populate]=*&populate[activities][populate]=*`;
+    const response = await axios.get(url, { headers });
+    if (response.status === 200) {
+      const activityCollections = response.data.data;
+      return activityCollections;
+    }
+    return [];
+  } catch (error) {
+    console.error(`Error fetching data ${error}`);
+    return [];
+  }
+}
+
 module.exports = {
   getMasterQuote,
   getDailyCheckinQuestions,
   getSurveyQuestions,
+  getActivityCollections,
 };

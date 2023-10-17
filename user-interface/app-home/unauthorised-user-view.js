@@ -1,9 +1,13 @@
 const { getCurrentDay } = require('../../utilities');
 const { getMasterQuote } = require('../../services/strapi/index');
+const { getActivityCollectionView } = require('../activity-collection/index');
 
 async function unauthorisedUserView() {
   const day = getCurrentDay();
   const quote = await getMasterQuote();
+  let activityCollections = await getActivityCollectionView();
+  activityCollections = activityCollections.flat(1);
+
   return {
     type: 'home',
     blocks: [
@@ -55,7 +59,6 @@ async function unauthorisedUserView() {
               text: ':Memo: Check-in',
               emoji: true,
             },
-            value: 'click_me_123',
             action_id: 'open-daily-checkin-modal',
           },
         ],
@@ -75,8 +78,22 @@ async function unauthorisedUserView() {
           },
         ],
       },
+      {
+        type: 'divider',
+      },
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: ':mag_right: Collections',
+          emoji: true,
+        },
+      },
+      {
+        type: 'divider',
+      },
+      ...activityCollections,
     ],
   };
 }
-
 module.exports = { unauthorisedUserView };
