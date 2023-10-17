@@ -1,4 +1,4 @@
-const getDailyCheckinModal = require('../../user-interface/models/daily-checkin-modal');
+const getDailyCheckinModal = require('../../user-interface/modals/daily-checkin-modal');
 
 const openDailyCheckinModalCallback = async ({ ack, body, client }) => {
   await ack();

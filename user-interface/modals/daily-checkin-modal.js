@@ -26,7 +26,7 @@ async function getDailyCheckinModal(username) {
       },
       label: {
         type: 'plain_text',
-        text: 'I feel..',
+        text: dailyCheckinQuestion.question,
         emoji: true,
       },
     };

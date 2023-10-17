@@ -1,4 +1,4 @@
-const contentLibraryModal = require('../../user-interface/models/content-library-modal');
+const contentLibraryModal = require('../../user-interface/modals/content-library-modal');
 
 const openContentLibraryModalCallback = async ({ ack, body, client }) => {
   await ack();

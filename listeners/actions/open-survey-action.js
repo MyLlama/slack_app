@@ -1,4 +1,4 @@
-const getSurveyModal = require('../../user-interface/models/survey-modal');
+const getSurveyModal = require('../../user-interface/modals/survey-modal');
 
 const openSurveyModalCallback = async ({ ack, body, client }) => {
   await ack();
