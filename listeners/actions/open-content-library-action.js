@@ -1,8 +1,8 @@
-const contentLibraryModal = require('../../user-interface/modals/content-library-modal');
+const getContentLibraryModal = require('../../user-interface/modals/content-library-modal');
 
 const openContentLibraryModalCallback = async ({ ack, body, client }) => {
   await ack();
-  const view = await contentLibraryModal(body);
+  const view = await getContentLibraryModal(body);
   try {
     await client.views.open({
       trigger_id: body.trigger_id,

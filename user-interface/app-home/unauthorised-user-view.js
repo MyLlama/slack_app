@@ -1,12 +1,12 @@
 const { getCurrentDay } = require('../../utilities');
 const { getMasterQuote } = require('../../services/strapi/index');
-const { activityCollectionView } = require('../activity-collection/index');
+const { getActivityCollectionView } = require('../activity-collection/index');
 
 async function unauthorisedUserView() {
   const day = getCurrentDay();
   const quote = await getMasterQuote();
-  let activityCollection = await activityCollectionView();
-  activityCollection = activityCollection.flat(1);
+  let activityCollections = await getActivityCollectionView();
+  activityCollections = activityCollections.flat(1);
 
   return {
     type: 'home',
@@ -92,7 +92,7 @@ async function unauthorisedUserView() {
       {
         type: 'divider',
       },
-      ...activityCollection,
+      ...activityCollections,
     ],
   };
 }

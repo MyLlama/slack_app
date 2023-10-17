@@ -1,20 +1,13 @@
-/* eslint-disable no-sequences */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-multiple-empty-lines */
 const { getActivityCollection } = require('../../services/strapi/index');
 
 const baseUrl = process.env.STRAPI_BASE_URL;
 
-
-async function activityCollectionView() {
+async function getActivityCollectionView() {
   const activityCollections = await getActivityCollection();
-  // eslint-disable-next-line arrow-body-style
   const activities = activityCollections.map((activityCollection) => {
     const imageEndPoint = activityCollection.attributes.thumbnail.data.attributes.url;
     const collectionTitle = activityCollection.attributes.title;
     const collectionDescription = activityCollection.attributes.description;
-    // const collectionId = activityCollection.attributes.activities[index].id;
-
 
     return [{
       type: 'section',
@@ -46,10 +39,9 @@ async function activityCollectionView() {
     },
     {
       type: 'divider',
-    // eslint-disable-next-line comma-dangle
-    },];
+    }];
   });
   return activities;
 }
 
-module.exports = { activityCollectionView };
+module.exports = { getActivityCollectionView };
