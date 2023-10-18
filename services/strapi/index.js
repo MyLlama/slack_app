@@ -54,13 +54,34 @@ async function getSurveyQuestions() {
   }
 }
 
-async function getActivityCollections() {
+async function getActivityCollections(params) {
   try {
-    const url = `${baseUrl}/activity-collections?populate[thumbnail][populate]=*&populate[activities][populate]=*`;
+    const initialEndpoint = '/activity-collections?populate=*&pagination[start]=0&pagination[limit]=3';
+    const showAllCollectionEndpoint = '/activity-collections?populate[thumbnail][populate]=*';
+    // If showAll button is clicked, The entire collection is rendered through
+    // showAllCollectionEndpoint.
+    const url = `${baseUrl}${params?.showAll ? showAllCollectionEndpoint : initialEndpoint}`;
     const response = await axios.get(url, { headers });
     if (response.status === 200) {
       const activityCollections = response.data.data;
       return activityCollections;
+    }
+    return [];
+  } catch (error) {
+    console.error(`Error fetching data ${error}`);
+    return [];
+  }
+}
+
+async function getActivityCollection(collectionId) {
+  const collectionQueryParam = 'populate[thumbnail][populate]=*&populate[activities][populate]=*';
+
+  try {
+    const url = `${baseUrl}/activity-collections/${collectionId}?${collectionQueryParam}`;
+    const response = await axios.get(url, { headers });
+    if (response.status === 200) {
+      const activityCollection = response.data.data;
+      return activityCollection;
     }
     return [];
   } catch (error) {
@@ -74,4 +95,5 @@ module.exports = {
   getDailyCheckinQuestions,
   getSurveyQuestions,
   getActivityCollections,
+  getActivityCollection,
 };

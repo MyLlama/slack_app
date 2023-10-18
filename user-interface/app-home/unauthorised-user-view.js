@@ -2,10 +2,10 @@ const { getCurrentDay } = require('../../utilities');
 const { getMasterQuote } = require('../../services/strapi/index');
 const { getActivityCollectionView } = require('../activity-collection/index');
 
-async function unauthorisedUserView() {
+async function unauthorisedUserView(params) {
   const day = getCurrentDay();
   const quote = await getMasterQuote();
-  let activityCollections = await getActivityCollectionView();
+  let activityCollections = await getActivityCollectionView(params);
   activityCollections = activityCollections.flat(1);
 
   return {

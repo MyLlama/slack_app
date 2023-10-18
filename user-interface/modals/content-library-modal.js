@@ -1,14 +1,13 @@
-const { getActivityCollections } = require('../../services/strapi/index');
+const { getActivityCollection } = require('../../services/strapi/index');
 
 const baseUrl = process.env.STRAPI_BASE_URL;
 
 async function getContentLibraryModal(body) {
-  const collections = await getActivityCollections();
+  // Extract the collection id from action id
+  const collectionId = body.actions[0].action_id.replace('open-content-library-modal-', '');
   try {
-    // Extract the collection id from action id
-    const collectionId = body.actions[0].action_id.replace('open-content-library-modal-', '');
-    // Find the selected collection based on collectionId
-    const selectedCollection = collections.find((collection) => collection.id == collectionId);
+    // get the selected collection based on collectionId
+    const selectedCollection = await getActivityCollection(collectionId);
     if (selectedCollection) {
       // Use map to create an array of modals for each activity
       const activities = selectedCollection.attributes.activities.map((activity) => [{
@@ -20,16 +19,9 @@ async function getContentLibraryModal(body) {
         },
       },
       {
-        type: 'video',
-        title: {
-          type: 'plain_text',
-          text: `*${activity.title}*`,
-          emoji: true,
-        },
-        title_url: 'https://www.youtube.com/embed/RRxQQxiM7AA?feature=oembed&autoplay=1',
-        video_url: 'https://www.youtube.com/embed/RRxQQxiM7AA?feature=oembed&autoplay=1',
-        alt_text: 'How to use Slack?',
-        thumbnail_url: `${baseUrl}${selectedCollection.attributes.thumbnail.data.attributes.url}`,
+        type: 'image',
+        image_url: `${baseUrl}${selectedCollection.attributes.thumbnail.data.attributes.url}`,
+        alt_text: `${activity.title}`,
       },
       {
         type: 'actions',
