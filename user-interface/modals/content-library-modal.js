@@ -21,7 +21,7 @@ async function getContentLibraryModal(body) {
       {
         type: 'image',
         image_url: `${baseUrl}${selectedCollection.attributes.thumbnail.data.attributes.url}`,
-        alt_text: 'inspiration',
+        alt_text: `${activity.title}`,
       },
       {
         type: 'actions',
