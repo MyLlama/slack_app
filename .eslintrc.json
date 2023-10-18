@@ -12,7 +12,6 @@
     "object-curly-newline": "off",
     "camelcase": "off",
     "no-console": "off",
-    "eqeqeq": "off",
-    "operator-linebreak": "off"
+    "eqeqeq": "off"
   }
 }

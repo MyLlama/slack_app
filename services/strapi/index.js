@@ -56,11 +56,11 @@ async function getSurveyQuestions() {
 
 async function getActivityCollections(params) {
   try {
-    // If no endpoint is provided(endpoint is empty), The initial collection is rendered through
-    // intialEndpoint.
     const initialEndpoint = '/activity-collections?populate=*&pagination[start]=0&pagination[limit]=3';
-    const showAllCollectionEndpoint = 'activity-collections?populate[thumbnail][populate]=*';
-    const url = params?.showAll ? `${baseUrl}/${showAllCollectionEndpoint}` : `${baseUrl}${initialEndpoint}`;
+    const showAllCollectionEndpoint = '/activity-collections?populate[thumbnail][populate]=*';
+    // If showAll button is clicked, The entire collection is rendered through
+    // showAllCollectionEndpoint.
+    const url = `${baseUrl}${params?.showAll ? showAllCollectionEndpoint : initialEndpoint}`;
     const response = await axios.get(url, { headers });
     if (response.status === 200) {
       const activityCollections = response.data.data;
@@ -77,8 +77,7 @@ async function getActivityCollection(collectionId) {
   const collectionQueryParam = 'populate[thumbnail][populate]=*&populate[activities][populate]=*';
 
   try {
-    const url =
-      `${baseUrl}/activity-collections/${collectionId}?${collectionQueryParam}`;
+    const url = `${baseUrl}/activity-collections/${collectionId}?${collectionQueryParam}`;
     const response = await axios.get(url, { headers });
     if (response.status === 200) {
       const activityCollection = response.data.data;
