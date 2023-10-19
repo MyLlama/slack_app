@@ -1,8 +1,8 @@
-const { getMyllamaMessage } = require('../messages/get-myllama-message');
+const { getActivityCollectionsMessage } = require('../messages/get-activity-collections-message');
 
 const getMyllamaCallback = async ({ ack, body, client }) => {
   await ack();
-  const blocks = await getMyllamaMessage(body.user_name);
+  const blocks = await getActivityCollectionsMessage(body.user_name);
   try {
     client.chat.postMessage({
       channel: body.user_id,

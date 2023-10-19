@@ -1,19 +1,15 @@
 const { getActivityCollections } = require('../../services/strapi/index');
 
-const getMyllamaMessage = async (username) => {
+const getActivityCollectionsMessage = async (username) => {
   const activities = await getActivityCollections({ showAll: true });
-  const activityButtons = activities.map((activity) => {
-    const activityButtonTitle = activity.attributes.title;
-    const activityId = activity.id;
-    return {
-      type: 'button',
-      text: {
-        type: 'plain_text',
-        text: activityButtonTitle,
-      },
-      action_id: `open-content-library-modal-${activityId}`,
-    };
-  });
+  const activityButtons = activities.map((activity) => ({
+    type: 'button',
+    text: {
+      type: 'plain_text',
+      text: activity.attributes.title,
+    },
+    action_id: `open-content-library-modal-${activity.id}`,
+  }));
   return [
     {
       type: 'section',
@@ -27,7 +23,7 @@ const getMyllamaMessage = async (username) => {
       type: 'section',
       text: {
         type: 'plain_text',
-        text: 'This is a plain text section block.',
+        text: 'What do you want to focus on today ?',
         emoji: true,
       },
     },
@@ -39,4 +35,4 @@ const getMyllamaMessage = async (username) => {
     },
   ];
 };
-module.exports = { getMyllamaMessage };
+module.exports = { getActivityCollectionsMessage };
