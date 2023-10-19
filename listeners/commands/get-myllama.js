@@ -1,4 +1,4 @@
-const { getActivityCollectionsMessage } = require('../messages/get-activity-collections-message');
+const { getActivityCollectionsMessage } = require('../messages/get-activity-collections');
 
 const getMyllamaCallback = async ({ ack, body, client }) => {
   await ack();
