@@ -23,7 +23,7 @@ const getActivityCollectionsMessage = async (username) => {
       type: 'section',
       text: {
         type: 'plain_text',
-        text: 'What do you want to focus on today ?',
+        text: 'What do you want to focus on today?',
         emoji: true,
       },
     },
