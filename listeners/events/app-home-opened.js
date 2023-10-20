@@ -1,11 +1,12 @@
 const view = require('../../user-interface/app-home/unauthorised-user-view');
-const { appIntroCallback } = require('../messages/app-intro');
+const { getWelcomeMessage } = require('../../services/strapi/index');
 
 const appHomeOpenedCallback = async ({ client, event, say }) => {
+  const welcomeMessage = await getWelcomeMessage();
   if (event.tab == 'home' && !event.view) {
-    await appIntroCallback(say, event);
+    say(`:wave: Hey <@${event.user}> \n \n ${welcomeMessage}`);
   }
-  console.log(event.user);
+
   const homeView = await view.unauthorisedUserView();
   try {
     await client.views.publish({
