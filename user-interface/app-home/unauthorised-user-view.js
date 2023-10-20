@@ -93,6 +93,13 @@ async function unauthorisedUserView(params) {
         type: 'divider',
       },
       ...activityCollections,
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: 'Suggestions? Questions? Problems? :point_right: <https://www.myllama.co|myllama.co>',
+        },
+      },
     ],
   };
 }

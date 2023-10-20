@@ -90,10 +90,27 @@ async function getActivityCollection(collectionId) {
   }
 }
 
+async function getWelcomeMessage() {
+  try {
+    const url = `${baseUrl}/intro-messages?populate=*`;
+    const response = await axios.get(url, { headers });
+
+    if (response.status === 200) {
+      const welcomeMessage = response.data.data[0].attributes.welcomeMsg;
+      return welcomeMessage;
+    }
+    return '';
+  } catch (error) {
+    console.error(`Error fetching data ${error}`);
+    return '';
+  }
+}
+
 module.exports = {
   getMasterQuote,
   getDailyCheckinQuestions,
   getSurveyQuestions,
   getActivityCollections,
   getActivityCollection,
+  getWelcomeMessage,
 };
