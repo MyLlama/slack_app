@@ -96,8 +96,8 @@ async function getWelcomeMessage() {
     const response = await axios.get(url, { headers });
 
     if (response.status === 200) {
-      const introMessage = response.data.data[0].attributes.introMsg;
-      return introMessage;
+      const welcomeMessage = response.data.data[0].attributes.welcomeMsg;
+      return welcomeMessage;
     }
     return '';
   } catch (error) {
