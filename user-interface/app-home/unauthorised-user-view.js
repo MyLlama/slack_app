@@ -82,6 +82,24 @@ async function unauthorisedUserView(params) {
         type: 'divider',
       },
       {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Sign In',
+              emoji: true,
+            },
+            value: 'click_me_123',
+            action_id: 'open-login-modal',
+          },
+        ],
+      },
+      {
+        type: 'divider',
+      },
+      {
         type: 'header',
         text: {
           type: 'plain_text',
