@@ -59,4 +59,42 @@ async function surveyFeedback(params) {
   });
 }
 
-module.exports = { dailyCheckinFeedback, surveyFeedback };
+async function postLoginCredentials(userid, token) {
+  const payload = {
+    TableName: 'UserCredentials',
+    Item: {
+      id: userid + Math.floor(Date.now() / 1000),
+      user_id: userid,
+      token,
+      timestamp: Math.floor(Date.now() / 1000),
+    },
+  };
+
+  docClient.put(payload, (error) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('Login Successful');
+    }
+  });
+}
+
+async function isUserAuthorised() {
+  const params = {
+    TableName: 'UserCredentials',
+    IndexName: 'user_id-index',
+    KeyConditionExpression: 'user_id = :v_title',
+    ExpressionAttributeValues: {
+      ':v_title': 'U05C2SR91FW',
+    },
+  };
+  try {
+    const resp = await docClient.query(params).promise();
+    return resp.Count;
+  } catch (err) {
+    console.error(err);
+    return 0;
+  }
+}
+
+module.exports = { dailyCheckinFeedback, surveyFeedback, postLoginCredentials, isUserAuthorised };
