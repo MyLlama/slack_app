@@ -11,7 +11,7 @@ const setLoginCredentials = async ({ ack, body, client }) => {
     const username = Object.values(body.view.state.values)[0].username.value;
     const password = Object.values(body.view.state.values)[1].password.value;
     const response = await login(username, password);
-    if (response) {
+    if (response.access_token) {
       postLoginCredentials(body.user.id, response.access_token);
       const homeView = await authorisedUserView();
       await client.views.publish({
